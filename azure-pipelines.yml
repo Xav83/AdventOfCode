@@ -15,4 +15,7 @@ steps:
       cd build
       cmake ..
       cmake --build .
+      ctest -C Debug
+      cmake --build . --config Release
+      ctest -C Release
     displayName: 'Build Advent Of Code Solutions'
