@@ -46,6 +46,14 @@ add_test(NAME advent_of_code_program_input_part_one
     COMMAND $<TARGET_FILE:NotQuiteLispPart1> ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 280
 )
 
+add_test(NAME advent_of_code_program_input_part_two_example_1
+    COMMAND $<TARGET_FILE:NotQuiteLispPart2> ${CMAKE_CURRENT_LIST_DIR}/res/Part2/example1.txt 1
+)
+
+add_test(NAME advent_of_code_program_input_part_two_example_2
+    COMMAND $<TARGET_FILE:NotQuiteLispPart2> ${CMAKE_CURRENT_LIST_DIR}/res/Part2/example2.txt 5
+)
+
 add_test(NAME advent_of_code_program_input_part_two
     COMMAND $<TARGET_FILE:NotQuiteLispPart2> ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 1796
 )
