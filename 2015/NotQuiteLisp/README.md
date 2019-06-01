@@ -28,3 +28,25 @@ For example:
 - `()())` causes him to enter the basement at character position `5`.
 
 What is the position of the character that causes Santa to first enter the basement?
+
+## Solution
+
+### Part 1
+
+The source of the solution is contained in the file [part_one.cpp](src/part_one.cpp), and a test checking this solution is in the file [CMakeLists.txt](CMakeLists.txt).
+The executable generated takes 2 arguments :
+- an input file containing the [puzzle input](res/puzzle_input.txt) from Advent Of Code,
+- and the expected final floor.
+
+If the expected final floor doesn't match the one find by the program, then, the result founded is displayed.
+Else, the program exits successfully.
+
+### Part 2
+
+The source of the solution is contained in the file [part_two.cpp](src/part_two.cpp), and a test checking this solution is in the file [CMakeLists.txt](CMakeLists.txt).
+The executable generated takes 2 arguments :
+- an input file containing the [puzzle input](res/puzzle_input.txt) from Advent Of Code,
+- and the expected position at which we entering the basement for the first time.
+
+If the expected result doesn't match the one find by the program, then, the result founded is displayed.
+Else, the program exits successfully.
