@@ -36,7 +36,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    const auto result = std::distance(std::begin(fileContent), firstEnteringInTheBasement);
+    const auto result = std::distance(std::begin(fileContent), firstEnteringInTheBasement) + 1;
     if(expectedResult == result)
     {
         return 0;
