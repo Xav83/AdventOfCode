@@ -5,4 +5,5 @@ My answer will be in [C++17](https://en.cppreference.com/w/cpp/language) (as lan
 
 ## Problems List
 
-- [NotQuiteLisp](2015/Day1)
+- [Not Quite Lisp](2015/Day1)
+- [I Was Told There Would Be No Math](2015/Day2)
