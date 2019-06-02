@@ -11,3 +11,7 @@ add_test(NAME IWasToldThereWouldBeNoMath_part_one_example_2
     COMMAND $<TARGET_FILE:IWasToldThereWouldBeNoMath_Part1> ${CMAKE_CURRENT_LIST_DIR}/res/Part1/example2.txt 43
 )
 
+add_test(NAME IWasToldThereWouldBeNoMath_part_one_puzzle_input
+    COMMAND $<TARGET_FILE:IWasToldThereWouldBeNoMath_Part1> ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 1606483
+)
+
