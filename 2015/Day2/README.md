@@ -26,3 +26,27 @@ For example:
 - A present with dimensions `1x1x10` requires `1+1+1+1 = 4` feet of ribbon to wrap the present plus `1*1*10 = 10` feet of ribbon for the bow, for a total of `14` feet.
 
 How many total <span style="color:white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;">feet of ribbon</span> should they order?
+
+## Solution
+
+The common code between the two parts has been grouped in a shared *static library* which is linked to the solution of the 2 parts. This library is defined in the [CMakeLists.txt](CMakeLists.txt) alongside of the definition of the two other parts.
+
+### Part 1
+
+The source of the solution is contained in the file [part_one.cpp](src/part_one.cpp), and a test checking this solution is in the file [CMakeLists.txt](CMakeLists.txt).
+The executable generated takes 2 arguments :
+- an input file containing the [puzzle input](res/puzzle_input.txt) from Advent Of Code,
+- and the expected final quantity of wrapping paper needed.
+
+If the expected final quantity of wrapping paper doesn't match the one find by the program, then, the result founded is displayed.
+Else, the program exits successfully.
+
+### Part 2
+
+The source of the solution is contained in the file [part_two.cpp](src/part_two.cpp), and a test checking this solution is in the file [CMakeLists.txt](CMakeLists.txt).
+The executable generated takes 2 arguments :
+- an input file containing the [puzzle input](res/puzzle_input.txt) from Advent Of Code,
+- and the expected lenght of ribbon needed.
+
+If the expected lenght of ribbon doesn't match the one find by the program, then, the result founded is displayed.
+Else, the program exits successfully.
