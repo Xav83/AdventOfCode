@@ -4,3 +4,4 @@ enable_testing()
 
 add_subdirectory(2015/Day1)
 add_subdirectory(2015/Day2)
+add_subdirectory(2015/Day3)
