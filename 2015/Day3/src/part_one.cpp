@@ -1,26 +1,8 @@
+#include "path.hpp"
 #include <iostream>
 #include <cassert>
 #include <fstream>
-#include <vector>
 #include <algorithm>
-
-struct Coordinate
-{
-    int x{0};
-    int y{0};
-
-    bool operator== (const Coordinate& other)
-    {
-        return x == other.x && y == other.y;
-    }
-
-    bool operator< (const Coordinate& other)
-    {
-        return x < other.x || (x == other.x && y < other.y);
-    }
-};
-
-using Path = std::vector<Coordinate>;
 
 int main (int argc, char** argv)
 {
