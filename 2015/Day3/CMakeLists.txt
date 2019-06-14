@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12.4)
 
 add_library(PerfectlySphericalHousesInAVacuum_shared STATIC src/coordinate.cpp)
+set_target_properties(PerfectlySphericalHousesInAVacuum_shared PROPERTIES CXX_STANDARD 17)
 
 add_executable(PerfectlySphericalHousesInAVacuum_Part1 src/part_one.cpp)
 set_target_properties(PerfectlySphericalHousesInAVacuum_Part1 PROPERTIES CXX_STANDARD 17)
