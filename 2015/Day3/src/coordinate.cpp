@@ -1,4 +1,4 @@
-#include "Coordinate.hpp"
+#include "coordinate.hpp"
 
 bool Coordinate::operator== (const Coordinate& other) const
 {
