@@ -34,3 +34,7 @@ add_test(NAME TheIdealStockingStuffer_part_one_example_1
 add_test(NAME TheIdealStockingStuffer_part_one_example_2
     COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "pqrstuv" 1048970
 )
+
+add_test(NAME TheIdealStockingStuffer_part_one_puzzle_input
+    COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "yzbqklnj" 282749
+)
