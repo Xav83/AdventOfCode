@@ -27,6 +27,10 @@ add_executable(TheIdealStockingStuffer_Part1 src/part_one.cpp)
 set_target_properties(TheIdealStockingStuffer_Part1 PROPERTIES CXX_STANDARD 17)
 target_link_libraries(TheIdealStockingStuffer_Part1 PUBLIC CONAN_PKG::OpenSSL)
 
+add_executable(TheIdealStockingStuffer_Part2 src/part_two.cpp)
+set_target_properties(TheIdealStockingStuffer_Part2 PROPERTIES CXX_STANDARD 17)
+target_link_libraries(TheIdealStockingStuffer_Part2 PUBLIC CONAN_PKG::OpenSSL)
+
 add_test(NAME TheIdealStockingStuffer_part_one_example_1
     COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "abcdef" 609043
 )
@@ -37,4 +41,8 @@ add_test(NAME TheIdealStockingStuffer_part_one_example_2
 
 add_test(NAME TheIdealStockingStuffer_part_one_puzzle_input
     COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "yzbqklnj" 282749
+)
+
+add_test(NAME TheIdealStockingStuffer_part_two_puzzle_input
+    COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part2> "yzbqklnj" 9962624
 )
