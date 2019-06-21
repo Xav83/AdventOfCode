@@ -7,15 +7,16 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'vs2017-win2016'
 
 steps:
   - script: |
+      choco install cppcheck
       mkdir build
       cd build
-      cmake ..
-      cmake --build .
-      ctest -C Debug
-      cmake --build . --config Release
-      ctest -C Release
-    displayName: 'Build Advent Of Code Solutions'
+      cmake .. && cmake --build . && ctest -C Debug
+    displayName: 'Build Advent Of Code Solutions in Debug mode'
+  - script: |
+      cd build
+      cmake --build . --config Release && ctest -C Release
+    displayName: 'Build Advent Of Code Solutions in Release mode'

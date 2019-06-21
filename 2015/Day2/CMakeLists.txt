@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12.4)
 
 add_library(shared_Part2 STATIC src/dimension.cpp src/string_manipulation.cpp)
+set_target_properties(shared_Part2 PROPERTIES CXX_STANDARD 17)
 
 add_executable(IWasToldThereWouldBeNoMath_Part1 src/part_one.cpp)
 set_target_properties(IWasToldThereWouldBeNoMath_Part1 PROPERTIES CXX_STANDARD 17)
