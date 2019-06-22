@@ -39,9 +39,9 @@ The common code between the two parts has been grouped in a shared *static libra
 The source of the solution is contained in the file [part_one.cpp](src/part_one.cpp), and a test checking this solution is in the file [CMakeLists.txt](CMakeLists.txt).
 The executable generated takes 2 arguments :
 - an input file containing the [puzzle input](res/puzzle_input.txt) from Advent Of Code,
-- and the expected final quantity of wrapping paper needed.
+- and the expected final number of houses visited.
 
-If the expected final quantity of wrapping paper doesn't match the one find by the program, then, the result founded is displayed.
+If the expected final number of houses visited doesn't match the one find by the program, then, the result founded is displayed.
 Else, the program exits successfully.
 
 ### Part 2
@@ -49,7 +49,7 @@ Else, the program exits successfully.
 The source of the solution is contained in the file [part_two.cpp](src/part_two.cpp), and a test checking this solution is in the file [CMakeLists.txt](CMakeLists.txt).
 The executable generated takes 2 arguments :
 - an input file containing the [puzzle input](res/puzzle_input.txt) from Advent Of Code,
-- and the expected lenght of ribbon needed.
+- and the expected number of houses visited.
 
-If the expected lenght of ribbon doesn't match the one find by the program, then, the result founded is displayed.
+If the expected number of houses visited doesn't match the one find by the program, then, the result founded is displayed.
 Else, the program exits successfully.

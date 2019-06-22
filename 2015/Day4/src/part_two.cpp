@@ -1,0 +1,34 @@
+#include "md5_wrapper.hpp"
+#include <cassert>
+#include <iostream>
+#include <string>
+
+int main (int argc, char** argv)
+{
+    assert(argc == 3);
+
+    const std::string secretKey = argv[1];
+    const auto expectedResult = atoi (argv[2]);
+
+    size_t result = 0;
+
+    while (true)
+    {
+        auto str = secretKey + std::to_string(result);
+        const auto md5Result = getMD5(str);
+        if(md5Result.substr(0, 6) == "000000")
+        {
+            break;
+        }
+        ++result;
+    }
+    if(result == expectedResult)
+    {
+        return 0;
+    }
+    else
+    {
+        std::cout << "The result found is " << result << " but the expected result is " << expectedResult << std::endl;
+        return 1;
+    }
+}
