@@ -3,23 +3,16 @@ cmake_minimum_required(VERSION 3.12.4)
 find_program(CONAN NAMES conan.exe HINTS "C:\\Program Files\\Conan\\conan")
 
 if(${CONAN}-NOTFOUND)
-    message(FATAL_ERRO "Conan not found")
+    message(FATAL_ERROR "Conan not found")
 endif(${CONAN}-NOTFOUND)
 
-# Download automatically, you can also just copy the conan.cmake file
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
-                  "${CMAKE_BINARY_DIR}/conan.cmake")
-endif()
-
-include(${CMAKE_BINARY_DIR}/conan.cmake)
-
-conan_cmake_run(REQUIRES OpenSSL/1.1.1a@conan/stable
-                BASIC_SETUP CMAKE_TARGETS
-                BUILD missing
-                OPTIONS OpenSSL:shared=False
+execute_process(COMMAND ${CONAN} install ${CMAKE_CURRENT_LIST_DIR} -s arch=x86 -s build_type=Debug -s compiler.runtime=MTd --build=missing
+                COMMAND ${CONAN} install ${CMAKE_CURRENT_LIST_DIR} -s arch=x86 -s build_type=Release -s compiler.runtime=MT --build=missing
+                WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
+conan_basic_setup(TARGETS)
 
 add_library(Md5Wrapper STATIC src/md5_wrapper.cpp)
 set_target_properties(Md5Wrapper PROPERTIES CXX_STANDARD 17)
