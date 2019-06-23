@@ -47,3 +47,7 @@ add_test(NAME DoesntHeHaveInternElvesForThis_Part1_part_two_example_3
 add_test(NAME DoesntHeHaveInternElvesForThis_Part1_part_two_example_4
     COMMAND $<TARGET_FILE:DoesntHeHaveInternElvesForThis_Part2> ${CMAKE_CURRENT_LIST_DIR}/res/Part2/example4.txt 0
 )
+
+add_test(NAME DoesntHeHaveInternElvesForThis_Part2_part_one_puzzle_input
+    COMMAND $<TARGET_FILE:DoesntHeHaveInternElvesForThis_Part2> ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 55
+)
