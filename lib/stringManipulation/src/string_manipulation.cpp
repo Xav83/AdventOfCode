@@ -1,5 +1,5 @@
-#include "string_manipulation.hpp"
 #include <sstream>
+#include <functional>
 
 void foreachElementsInStringDelimitedBy(const std::string& input, const char delimiter, std::function<void(const std::string&)> callback)
 {
