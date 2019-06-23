@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.12.4)
 
-include(${PROJECT_SOURCE_DIR}/lib/stringManipulation/StringManipulation.cmake)
-
 add_library(dimension src/dimension.cpp)
 set_target_properties(dimension PROPERTIES CXX_STANDARD 17)
 target_link_libraries(dimension PUBLIC stringManipulation)
