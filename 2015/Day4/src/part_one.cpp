@@ -16,7 +16,8 @@ int main (int argc, char** argv)
     {
         const auto str = secretKey + std::to_string(result);
         const auto md5Result = getMD5(str);
-        if(md5Result.substr(0, 5) == "00000")
+        const auto md5Str = byteToString(md5Result);
+        if(md5Str.substr(0, 5) == "00000")
         {
             break;
         }
