@@ -20,6 +20,7 @@ add_custom_target(
         COMMENT "Running cppcheck"
 )
 
+include(${PROJECT_SOURCE_DIR}/lib/coordinate/Coordinate.cmake)
 include(${PROJECT_SOURCE_DIR}/lib/stringManipulation/StringManipulation.cmake)
 
 enable_testing()

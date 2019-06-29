@@ -1,15 +1,12 @@
 cmake_minimum_required(VERSION 3.12.4)
 
-add_library(PerfectlySphericalHousesInAVacuum_shared STATIC src/coordinate.cpp)
-set_target_properties(PerfectlySphericalHousesInAVacuum_shared PROPERTIES CXX_STANDARD 17)
-
 add_executable(PerfectlySphericalHousesInAVacuum_Part1 src/part_one.cpp)
 set_target_properties(PerfectlySphericalHousesInAVacuum_Part1 PROPERTIES CXX_STANDARD 17)
-target_link_libraries(PerfectlySphericalHousesInAVacuum_Part1 PerfectlySphericalHousesInAVacuum_shared)
+target_link_libraries(PerfectlySphericalHousesInAVacuum_Part1 coordinate)
 
 add_executable(PerfectlySphericalHousesInAVacuum_Part2 src/part_two.cpp)
 set_target_properties(PerfectlySphericalHousesInAVacuum_Part2 PROPERTIES CXX_STANDARD 17)
-target_link_libraries(PerfectlySphericalHousesInAVacuum_Part2 PerfectlySphericalHousesInAVacuum_shared)
+target_link_libraries(PerfectlySphericalHousesInAVacuum_Part2 coordinate)
 
 add_test(NAME PerfectlySphericalHousesInAVacuum_part_one_example_1
     COMMAND $<TARGET_FILE:PerfectlySphericalHousesInAVacuum_Part1> ${CMAKE_CURRENT_LIST_DIR}/res/Part1/example1.txt 2
