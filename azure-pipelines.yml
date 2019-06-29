@@ -11,7 +11,8 @@ pool:
 
 steps:
   - script: |
-      choco install cppcheck conan
+      choco install cppcheck --version 1.87
+      choco install conan --version 1.11.1
       mkdir build
       cd build
       cmake .. && cmake --build . && ctest -C Debug
