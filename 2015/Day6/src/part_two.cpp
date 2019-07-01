@@ -1,20 +1,10 @@
 #include "string_manipulation.hpp"
-#include "coordinate.hpp"
+#include "input_parser.hpp"
 #include <array>
 #include <cassert>
-#include <functional>
 #include <fstream>
 #include <iostream>
 #include <numeric>
-#include <regex>
-#include <sstream>
-
-enum class LightAction
-{
-    TURN_ON,
-    TURN_OFF,
-    TOGGLE,
-};
 
 class Light
 {
@@ -31,22 +21,6 @@ public:
 private:
     size_t brightness{0};
 };
-
-struct Rectangle
-{
-    Coordinate topLeft, bottomRight;
-};
-
-void foreachCoordinateInRectangle(Rectangle rect, std::function<void(const Coordinate)> callback)
-{
-        for(auto x = rect.topLeft.x; x <= rect.bottomRight.x; ++x)
-        {
-            for(auto y = rect.topLeft.y; y <= rect.bottomRight.y; ++y)
-            {
-                callback({x, y});
-            }
-        }
-}
 
 class Grid
 {
@@ -93,41 +67,6 @@ private:
     std::array<std::array<Light, 1000>, 1000> grid;
 };
 
-LightAction getActionFromLine(const std::string_view line)
-{
-    if(line.compare(0, 7, "turn on") == 0)
-    {
-        return LightAction::TURN_ON;
-    }
-    if(line.compare(0, 8, "turn off") == 0)
-    {
-        return LightAction::TURN_OFF;
-    }
-    if(line.compare(0, 6, "toggle") == 0)
-    {
-        return LightAction::TOGGLE;
-    }
-    assert(false);
-}
-
-Rectangle getRectangleFromLine(std::string line)
-{
-    std::regex word_regex("([0-9]+)");
-    auto words_begin = 
-        std::sregex_iterator(line.begin(), line.end(), word_regex);
-    auto words_end = std::sregex_iterator();
-
-    std::array<int, 4> values;
-    auto valueIndex{0};
-
-    for (std::sregex_iterator i = words_begin; i != words_end; ++i, ++valueIndex)
-    {
-        std::smatch match = *i;
-        values[valueIndex] = atoi(match.str().c_str());
-    }
-    return {{values[0], values[1]}, {values[2], values[3]}};
-}
-
 int main (int argc, char** argv)
 {
     assert(argc == 3);
@@ -136,7 +75,6 @@ int main (int argc, char** argv)
     assert (file.is_open());
 
     const auto expectedResult = atoi (argv[2]);
-
 
     std::string fileContent((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 
