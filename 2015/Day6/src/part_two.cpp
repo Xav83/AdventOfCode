@@ -28,7 +28,7 @@ public:
     Grid () = default;
     ~Grid () = default;
 
-    void turnOn(Rectangle rect)
+    void turnOn(const Rectangle& rect)
     {
         foreachCoordinateInRectangle(rect, [this](const Coordinate coordinate)
         {
@@ -36,7 +36,7 @@ public:
         });
     }
 
-    void turnOff(Rectangle rect)
+    void turnOff(const Rectangle& rect)
     {
         foreachCoordinateInRectangle(rect, [this](const Coordinate coordinate)
         {
@@ -44,7 +44,7 @@ public:
         });
     }
 
-    void toggle(Rectangle rect)
+    void toggle(const Rectangle& rect)
     {
         foreachCoordinateInRectangle(rect, [this](const Coordinate coordinate)
         {
