@@ -20,6 +20,7 @@ add_custom_target(
         COMMENT "Running cppcheck"
 )
 
+include(${PROJECT_SOURCE_DIR}/lib/coordinate/Coordinate.cmake)
 include(${PROJECT_SOURCE_DIR}/lib/stringManipulation/StringManipulation.cmake)
 
 enable_testing()
@@ -29,3 +30,4 @@ add_subdirectory(2015/Day2)
 add_subdirectory(2015/Day3)
 add_subdirectory(2015/Day4)
 add_subdirectory(2015/Day5)
+add_subdirectory(2015/Day6)
