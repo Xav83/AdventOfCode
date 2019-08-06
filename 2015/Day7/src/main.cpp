@@ -73,7 +73,7 @@ using Signal = uint16_t;
 class Wire
 {
 public:
-    Wire (const std::string& name_) : name(name_) {}
+    explicit Wire (const std::string& name_) : name(name_) {}
     ~Wire () = default;
 
     bool operator==(const Wire& other) const
@@ -166,7 +166,7 @@ Wires getWiresNameInInstruction (const std::string& instruction)
     for (std::sregex_iterator i = words_begin; i != words_end; ++i)
     {
         std::smatch match = *i;
-        wires.addNewWire(match.str());
+        wires.addNewWire(Wire(match.str()));
     }
     return wires;
 }
