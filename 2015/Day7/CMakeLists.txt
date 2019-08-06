@@ -9,3 +9,6 @@ add_test(NAME SomeAssemblyRequired_part_one_example
     COMMAND $<TARGET_FILE:SomeAssemblyRequired> ${CMAKE_CURRENT_LIST_DIR}/res/Part1/puzzle_input.txt 46065
 )
 
+add_test(NAME SomeAssemblyRequired_part_two_example
+    COMMAND $<TARGET_FILE:SomeAssemblyRequired> ${CMAKE_CURRENT_LIST_DIR}/res/Part2/puzzle_input.txt 14134
+)
