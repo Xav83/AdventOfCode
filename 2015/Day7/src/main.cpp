@@ -379,10 +379,7 @@ private:
 class Operations
 {
 public:
-    Operations ()
-    {
-        operations.reserve(100);
-    }
+    Operations () = default;
     ~Operations () = default;
 
     void addNewOperation(OperationType type, Wires& wires, Wires& wiresFromInstruction, const std::string& instruction)
