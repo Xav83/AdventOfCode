@@ -15,26 +15,6 @@ enum class OperationType
     ATTRIBUTION, // 123 -> x
 };
 
-std::string operationTypeToString(const OperationType type)
-{
-    switch (type)
-    {
-    case OperationType::AND:
-        return "AND";
-    case OperationType::OR:
-        return "OR";
-    case OperationType::LSHIFT:
-        return "LSHIFT";
-    case OperationType::RSHIFT:
-        return "RSHIFT";
-    case OperationType::NOT:
-        return "NOT";
-    case OperationType::ATTRIBUTION:
-        return "ATTRIBUTION";
-    }
-    return "";
-}
-
 OperationType getOperationFromInstruction (const std::string& instruction)
 {
     if(instruction.find("AND") != std::string::npos)
