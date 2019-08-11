@@ -1,13 +1,8 @@
 #include "string_manipulation.hpp"
-#include <algorithm>
-#include <bitset>
 #include <cassert>
 #include <fstream>
 #include <iostream>
 #include <regex>
-#include <string>
-#include <sstream>
-#include <any>
 #include <cctype>
 
 enum class OperationType
@@ -20,45 +15,25 @@ enum class OperationType
     ATTRIBUTION, // 123 -> x
 };
 
-std::string operationTypeToString(const OperationType type)
+OperationType getOperationFromInstruction (const std::string_view instruction)
 {
-    switch (type)
-    {
-    case OperationType::AND:
-        return "AND";
-    case OperationType::OR:
-        return "OR";
-    case OperationType::LSHIFT:
-        return "LSHIFT";
-    case OperationType::RSHIFT:
-        return "RSHIFT";
-    case OperationType::NOT:
-        return "NOT";
-    case OperationType::ATTRIBUTION:
-        return "ATTRIBUTION";
-    }
-    return "";
-}
-
-OperationType getOperationFromInstruction (const std::string& instruction)
-{
-    if(instruction.find("AND") != std::string::npos)
+    if(instruction.find("AND") != std::string_view::npos)
     {
         return OperationType::AND;
     }
-    else if(instruction.find("OR") != std::string::npos)
+    else if(instruction.find("OR") != std::string_view::npos)
     {
         return OperationType::OR;
     }
-    else if(instruction.find("LSHIFT") != std::string::npos)
+    else if(instruction.find("LSHIFT") != std::string_view::npos)
     {
         return OperationType::LSHIFT;
     }
-    else if(instruction.find("RSHIFT") != std::string::npos)
+    else if(instruction.find("RSHIFT") != std::string_view::npos)
     {
         return OperationType::RSHIFT;
     }
-    else if(instruction.find("NOT") != std::string::npos)
+    else if(instruction.find("NOT") != std::string_view::npos)
     {
         return OperationType::NOT;
     }
@@ -73,7 +48,7 @@ using Signal = uint16_t;
 class Wire
 {
 public:
-    explicit Wire (const std::string& name_) : name(name_) {}
+    explicit Wire (const std::string_view name_) : name(name_) {}
     ~Wire () = default;
 
     bool operator==(const Wire& other) const
@@ -91,9 +66,7 @@ public:
         hasSignalValueBeenSet = true;
     }
 
-    std::string getName() const { return name; }
-
-    auto getValue() const { return value; }
+    std::string_view getName() const { return name; }
 
 private:
     std::string name;
@@ -104,10 +77,7 @@ private:
 class Wires
 {
 public:
-    Wires ()
-    {
-        wires.reserve(100);
-    }
+    Wires () = default;
     ~Wires () = default;
 
     void addNewWire(const Wire& wire)
@@ -174,23 +144,24 @@ Wires getWiresNameInInstruction (const std::string& instruction)
 class Operation
 {
 public:
-    virtual Wire& getResultWire () = 0;
+    explicit Operation (Wire& output_) : output(output_) {}
+    ~Operation () = default;
+
+    Wire& getResultWire () { return output; }
     virtual bool canBeExecuted () const = 0;
     virtual bool isExecuted () const = 0;
     virtual void execute () = 0;
+
+protected:
+    Wire &output;
 };
 
 class And : public Operation
 {
 public:
-    And (Wire& input1_, Wire& input2_, Wire& output_) : input_wire(&input1_), input2(input2_), output(output_) { }
-    And (Signal input1_, Wire& input2_, Wire& output_) : input_signal(input1_), input2(input2_), output(output_) { }
+    And (Wire& input1_, Wire& input2_, Wire& output_) : Operation(output_), input_wire(&input1_), input2(input2_) { }
+    And (Signal input1_, Wire& input2_, Wire& output_) : Operation(output_), input_signal(input1_), input2(input2_) { }
     ~And () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -221,7 +192,7 @@ public:
     }
 
 private:
-    Wire* input_wire{nullptr},& input2,& output;
+    Wire* input_wire{nullptr},& input2;
     Signal input_signal{0};
     bool hasBeenExecuted{false};
 };
@@ -229,13 +200,8 @@ private:
 class Or : public Operation
 {
 public:
-    Or (Wire& input1_, Wire& input2_, Wire& output_) : input1(input1_), input2(input2_), output(output_) {}
+    Or (Wire& input1_, Wire& input2_, Wire& output_) : Operation(output_), input1(input1_), input2(input2_) {}
     ~Or () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -254,20 +220,15 @@ public:
     }
 
 private:
-    Wire& input1, &input2, &output;
+    Wire& input1, &input2;
     bool hasBeenExecuted{false};
 };
 
 class LShift : public Operation
 {
 public:
-    LShift (Wire& input_, size_t number_, Wire& output_) : input(input_), number(number_), output(output_) {}
+    LShift (Wire& input_, size_t number_, Wire& output_) : Operation(output_), input(input_), number(number_) {}
     ~LShift () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -286,7 +247,7 @@ public:
     }
 
 private:
-    Wire& input, &output;
+    Wire& input;
     size_t number{0};
     bool hasBeenExecuted{false};
 };
@@ -294,13 +255,8 @@ private:
 class RShift : public Operation
 {
 public:
-    RShift (Wire& input_, size_t number_, Wire& output_) : input(input_), number(number_), output(output_) {}
+    RShift (Wire& input_, size_t number_, Wire& output_) : Operation(output_), input(input_), number(number_) {}
     ~RShift () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -319,7 +275,7 @@ public:
     }
 
 private:
-    Wire& input, &output;
+    Wire& input;
     size_t number{0};
     bool hasBeenExecuted{false};
 };
@@ -327,13 +283,8 @@ private:
 class Not : public Operation
 {
 public:
-    Not (Wire& input_, Wire& output_) : input(input_), output(output_) { }
+    Not (Wire& input_, Wire& output_) : Operation(output_), input(input_) { }
     ~Not () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -352,22 +303,16 @@ public:
     }
 
 private:
-    Wire& input,& output;
+    Wire& input;
     bool hasBeenExecuted{false};
 };
 
 class Attribution : public Operation
 {
 public:
-    Attribution (Signal input_, Wire& output_) : input_signal(input_), output(output_) {}
-    Attribution (Wire& input_, Wire& output_) : input_wire(&input_), output(output_) {}
-    Attribution (const Attribution& other) : output(other.output) {}
+    Attribution (Signal input_, Wire& output_) : Operation(output_), input_signal(input_) {}
+    Attribution (Wire& input_, Wire& output_) : Operation(output_), input_wire(&input_) {}
     ~Attribution () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -394,14 +339,14 @@ public:
         }
         else 
         {
-            output.setSignal (input_wire->getValue());
+            output.setSignal (input_wire->getSignal());
         }
 
         hasBeenExecuted = true;
     }
 
 private:
-    Wire* input_wire{nullptr}, & output;
+    Wire* input_wire{nullptr};
     Signal input_signal{0};
     bool hasBeenExecuted{false};
 };
@@ -409,10 +354,7 @@ private:
 class Operations
 {
 public:
-    Operations ()
-    {
-        operations.reserve(100);
-    }
+    Operations () = default;
     ~Operations () = default;
 
     void addNewOperation(OperationType type, Wires& wires, Wires& wiresFromInstruction, const std::string& instruction)
@@ -542,18 +484,20 @@ int main (int argc, char** argv)
    operations.run();
 
     auto& wiresList = wires.getWires();
-    auto wire = std::find_if(std::begin(wiresList), std::end(wiresList), [](const auto wire)
+    const auto wire = std::find_if(std::begin(wiresList), std::end(wiresList), [](const auto wire)
     {
         return wire.getName() == "a";
     });
 
-    if(expectedResult == wire->getValue())
+    assert(wire != std::end(wiresList));
+
+    if(expectedResult == wire->getSignal())
     {
         return 0;
     }
     else
     {
-        std::cout << "The result found is " << wire->getValue() << " but the expected result is " << expectedResult << std::endl;
+        std::cout << "The result found is " << wire->getSignal() << " but the expected result is " << expectedResult << std::endl;
         return 1;
     }
 }
