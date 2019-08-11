@@ -544,7 +544,9 @@ int main (int argc, char** argv)
         return wire.getName() == "a";
     });
 
-    if(expectedResult == wire->getValue())
+    assert(wire != std::end(wiresList));
+
+    if(expectedResult == wire->getSignal())
     {
         return 0;
     }
