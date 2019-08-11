@@ -19,3 +19,7 @@ add_test(NAME Matchsticks_part_one_puzzle_input
 add_test(NAME Matchsticks_part_two_example
     COMMAND $<TARGET_FILE:Matchsticks_Part2> ${CMAKE_CURRENT_LIST_DIR}/res/example.txt 19
 )
+
+add_test(NAME Matchsticks_part_two_puzzle_input
+    COMMAND $<TARGET_FILE:Matchsticks_Part2> ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 2046
+)
