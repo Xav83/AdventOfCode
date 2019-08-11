@@ -15,25 +15,25 @@ enum class OperationType
     ATTRIBUTION, // 123 -> x
 };
 
-OperationType getOperationFromInstruction (const std::string& instruction)
+OperationType getOperationFromInstruction (const std::string_view instruction)
 {
-    if(instruction.find("AND") != std::string::npos)
+    if(instruction.find("AND") != std::string_view::npos)
     {
         return OperationType::AND;
     }
-    else if(instruction.find("OR") != std::string::npos)
+    else if(instruction.find("OR") != std::string_view::npos)
     {
         return OperationType::OR;
     }
-    else if(instruction.find("LSHIFT") != std::string::npos)
+    else if(instruction.find("LSHIFT") != std::string_view::npos)
     {
         return OperationType::LSHIFT;
     }
-    else if(instruction.find("RSHIFT") != std::string::npos)
+    else if(instruction.find("RSHIFT") != std::string_view::npos)
     {
         return OperationType::RSHIFT;
     }
-    else if(instruction.find("NOT") != std::string::npos)
+    else if(instruction.find("NOT") != std::string_view::npos)
     {
         return OperationType::NOT;
     }
@@ -48,7 +48,7 @@ using Signal = uint16_t;
 class Wire
 {
 public:
-    explicit Wire (const std::string& name_) : name(name_) {}
+    explicit Wire (const std::string_view name_) : name(name_) {}
     ~Wire () = default;
 
     bool operator==(const Wire& other) const
@@ -66,7 +66,7 @@ public:
         hasSignalValueBeenSet = true;
     }
 
-    std::string getName() const { return name; }
+    std::string_view getName() const { return name; }
 
 private:
     std::string name;
