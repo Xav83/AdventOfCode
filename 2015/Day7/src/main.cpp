@@ -1,13 +1,8 @@
 #include "string_manipulation.hpp"
-#include <algorithm>
-#include <bitset>
 #include <cassert>
 #include <fstream>
 #include <iostream>
 #include <regex>
-#include <string>
-#include <sstream>
-#include <any>
 #include <cctype>
 
 enum class OperationType
