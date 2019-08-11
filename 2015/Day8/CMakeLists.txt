@@ -5,7 +5,7 @@ set_target_properties(Matchsticks PROPERTIES CXX_STANDARD 17)
 target_link_libraries(Matchsticks PUBLIC stringManipulation)
 
 add_test(NAME Matchsticks_part_one_example
-    COMMAND $<TARGET_FILE:Matchsticks> ${CMAKE_CURRENT_LIST_DIR}/res/Part1/example.txt 12
+    COMMAND $<TARGET_FILE:Matchsticks> ${CMAKE_CURRENT_LIST_DIR}/res/example.txt 12
 )
 
 add_test(NAME Matchsticks_part_one_puzzle_input
