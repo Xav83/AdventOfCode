@@ -93,8 +93,6 @@ public:
 
     std::string getName() const { return name; }
 
-    auto getValue() const { return value; }
-
 private:
     std::string name;
     bool hasSignalValueBeenSet{false};
@@ -391,7 +389,7 @@ public:
         }
         else 
         {
-            output.setSignal (input_wire->getValue());
+            output.setSignal (input_wire->getSignal());
         }
 
         hasBeenExecuted = true;
@@ -539,7 +537,7 @@ int main (int argc, char** argv)
    operations.run();
 
     auto& wiresList = wires.getWires();
-    auto wire = std::find_if(std::begin(wiresList), std::end(wiresList), [](const auto wire)
+    const auto wire = std::find_if(std::begin(wiresList), std::end(wiresList), [](const auto wire)
     {
         return wire.getName() == "a";
     });
@@ -552,7 +550,7 @@ int main (int argc, char** argv)
     }
     else
     {
-        std::cout << "The result found is " << wire->getValue() << " but the expected result is " << expectedResult << std::endl;
+        std::cout << "The result found is " << wire->getSignal() << " but the expected result is " << expectedResult << std::endl;
         return 1;
     }
 }
