@@ -104,10 +104,7 @@ private:
 class Wires
 {
 public:
-    Wires ()
-    {
-        wires.reserve(100);
-    }
+    Wires () = default;
     ~Wires () = default;
 
     void addNewWire(const Wire& wire)
