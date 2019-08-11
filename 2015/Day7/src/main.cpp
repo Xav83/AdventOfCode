@@ -169,23 +169,24 @@ Wires getWiresNameInInstruction (const std::string& instruction)
 class Operation
 {
 public:
-    virtual Wire& getResultWire () = 0;
+    explicit Operation (Wire& output_) : output(output_) {}
+    ~Operation () = default;
+
+    Wire& getResultWire () { return output; }
     virtual bool canBeExecuted () const = 0;
     virtual bool isExecuted () const = 0;
     virtual void execute () = 0;
+
+protected:
+    Wire &output;
 };
 
 class And : public Operation
 {
 public:
-    And (Wire& input1_, Wire& input2_, Wire& output_) : input_wire(&input1_), input2(input2_), output(output_) { }
-    And (Signal input1_, Wire& input2_, Wire& output_) : input_signal(input1_), input2(input2_), output(output_) { }
+    And (Wire& input1_, Wire& input2_, Wire& output_) : Operation(output_), input_wire(&input1_), input2(input2_) { }
+    And (Signal input1_, Wire& input2_, Wire& output_) : Operation(output_), input_signal(input1_), input2(input2_) { }
     ~And () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -216,7 +217,7 @@ public:
     }
 
 private:
-    Wire* input_wire{nullptr},& input2,& output;
+    Wire* input_wire{nullptr},& input2;
     Signal input_signal{0};
     bool hasBeenExecuted{false};
 };
@@ -224,13 +225,8 @@ private:
 class Or : public Operation
 {
 public:
-    Or (Wire& input1_, Wire& input2_, Wire& output_) : input1(input1_), input2(input2_), output(output_) {}
+    Or (Wire& input1_, Wire& input2_, Wire& output_) : Operation(output_), input1(input1_), input2(input2_) {}
     ~Or () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -249,20 +245,15 @@ public:
     }
 
 private:
-    Wire& input1, &input2, &output;
+    Wire& input1, &input2;
     bool hasBeenExecuted{false};
 };
 
 class LShift : public Operation
 {
 public:
-    LShift (Wire& input_, size_t number_, Wire& output_) : input(input_), number(number_), output(output_) {}
+    LShift (Wire& input_, size_t number_, Wire& output_) : Operation(output_), input(input_), number(number_) {}
     ~LShift () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -281,7 +272,7 @@ public:
     }
 
 private:
-    Wire& input, &output;
+    Wire& input;
     size_t number{0};
     bool hasBeenExecuted{false};
 };
@@ -289,13 +280,8 @@ private:
 class RShift : public Operation
 {
 public:
-    RShift (Wire& input_, size_t number_, Wire& output_) : input(input_), number(number_), output(output_) {}
+    RShift (Wire& input_, size_t number_, Wire& output_) : Operation(output_), input(input_), number(number_) {}
     ~RShift () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -314,7 +300,7 @@ public:
     }
 
 private:
-    Wire& input, &output;
+    Wire& input;
     size_t number{0};
     bool hasBeenExecuted{false};
 };
@@ -322,13 +308,8 @@ private:
 class Not : public Operation
 {
 public:
-    Not (Wire& input_, Wire& output_) : input(input_), output(output_) { }
+    Not (Wire& input_, Wire& output_) : Operation(output_), input(input_) { }
     ~Not () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -347,22 +328,16 @@ public:
     }
 
 private:
-    Wire& input,& output;
+    Wire& input;
     bool hasBeenExecuted{false};
 };
 
 class Attribution : public Operation
 {
 public:
-    Attribution (Signal input_, Wire& output_) : input_signal(input_), output(output_) {}
-    Attribution (Wire& input_, Wire& output_) : input_wire(&input_), output(output_) {}
-    Attribution (const Attribution& other) : output(other.output) {}
+    Attribution (Signal input_, Wire& output_) : Operation(output_), input_signal(input_) {}
+    Attribution (Wire& input_, Wire& output_) : Operation(output_), input_wire(&input_) {}
     ~Attribution () = default;
-
-    Wire& getResultWire () override
-    {
-        return output;
-    }
 
     bool canBeExecuted () const override
     {
@@ -396,7 +371,7 @@ public:
     }
 
 private:
-    Wire* input_wire{nullptr}, & output;
+    Wire* input_wire{nullptr};
     Signal input_signal{0};
     bool hasBeenExecuted{false};
 };
