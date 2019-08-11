@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12.4)
 
-add_executable(Matchsticks src/main.cpp)
+add_executable(Matchsticks src/part_one.cpp)
 set_target_properties(Matchsticks PROPERTIES CXX_STANDARD 17)
 target_link_libraries(Matchsticks PUBLIC stringManipulation)
 
