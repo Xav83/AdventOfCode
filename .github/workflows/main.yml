@@ -1,0 +1,25 @@
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-2016
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Installing dependency
+      run: |
+        choco install cppcheck --version 1.87
+        choco install conan --version 1.11.1
+    - name: Creating Build folder
+      run: mkdir build
+    - name: Generating the solution
+      run: |
+        cd build
+        cmake .. -G "Visual Studio 15 2017"
+    - name: Building the solution
+      run: |
+        cd build
+        cmake --build .
