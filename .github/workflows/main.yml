@@ -15,11 +15,11 @@ jobs:
         choco install conan --version 1.11.1
     - name: Creating Build folder
       run: mkdir build
-    - name: Generating the solution
+    - name: Build Advent Of Code Solutions in Debug mode
       run: |
         cd build
-        cmake .. -G "Visual Studio 15 2017"
-    - name: Building the solution
+        cmake .. -G "Visual Studio 15 2017" && cmake --build . && ctest -C Debug
+    - name: Build Advent Of Code Solutions in Release mode
       run: |
         cd build
-        cmake --build .
+        cmake --build . --config Release && ctest -C Release
