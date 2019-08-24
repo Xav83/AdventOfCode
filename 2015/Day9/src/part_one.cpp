@@ -1,68 +1,10 @@
 #include "string_manipulation.hpp"
+#include "types.hpp"
+#include "input_parser.hpp"
 #include <cassert>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
-#include <regex>
-
-using Distance = size_t;
-
-class City
-{
-public:
-    explicit City (const std::string_view name_) : name(name_) {}
-    ~City () = default;
-
-    bool operator==(const City& other) const { return other.name == name; }
-    bool operator<(const City& other) const { return name < other.name; }
-
-private:
-    std::string name;
-};
-
-std::pair<City, City> getCitiesFromInstruction (const std::string_view instruction)
-{
-    const auto citySeparatorPosition = instruction.find(" to ");
-    const auto equalSeparatorPosition = instruction.substr(citySeparatorPosition+4).find(" = ");
-    return std::make_pair(City(instruction.substr(0, citySeparatorPosition)), City(instruction.substr(citySeparatorPosition+4, equalSeparatorPosition)));
-}
-
-Distance getDistanceFromInstruction (const std::string& instruction)
-{
-    std::regex word_regex("[0-9]+");
-    auto words_begin = std::sregex_iterator(std::begin(instruction), std::end(instruction), word_regex);
-    auto words_end = std::sregex_iterator();
-
-    auto value{0};
-
-    for (std::sregex_iterator i = words_begin; i != words_end; ++i)
-    {
-        std::smatch match = *i;
-        return static_cast<Distance>(atoi(match.str().c_str()));
-    }
-    assert (false);
-    return 0;
-}
-
-class Route
-{
-public:
-    Route (City& firstTown_, Distance distance_, City& secondTown_) :
-    firstTown(firstTown_), secondTown(secondTown_), distance(distance_)
-    {}
-    ~Route () = default;
-
-    Distance getDistance () const { return distance; }
-
-    bool isRouteBetween(const City& firstCity, const City& secondCity) const
-    {
-        return (firstCity == firstTown && secondCity == secondTown) || (secondCity == firstTown && firstCity == secondTown);
-    }
-
-private:
-    City& firstTown, &secondTown;
-    Distance distance{0};
-};
 
 class Graph
 {

@@ -41,14 +41,14 @@ For example, given the distances above, the longest route would be `982` via (fo
 
 ### Part 1
 
-The source of the solution is contained in the file [part_one.cpp](src/part_one.cpp), and the tests checking this solution are in the file [CMakeLists.txt](CMakeLists.txt).
+The source of the solution is contained in the file [part_one.cpp](src/part_one.cpp), and the tests checking this solution are in the file [CMakeLists.txt](CMakeLists.txt). There is also some common code from the two parts of this problem in the other files of the `src` folder.
 The executable generated takes 2 arguments :
 - the file containing the list,
 - and the expected shortest distance.
 
 ### Part 2
 
-The source of the solution is contained in the file [part_two.cpp](src/part_two.cpp), and the tests checking this solution are in the file [CMakeLists.txt](CMakeLists.txt).
+The source of the solution is contained in the file [part_two.cpp](src/part_two.cpp), and the tests checking this solution are in the file [CMakeLists.txt](CMakeLists.txt). There is also some common code from the two parts of this problem in the other files of the `src` folder.
 The executable generated takes 2 arguments :
 - the file containing the list,
 - and the expected longest.
