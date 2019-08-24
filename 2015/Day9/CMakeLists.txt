@@ -19,3 +19,7 @@ add_test(NAME AllInASingleNight_part_one_puzzle_input
 add_test(NAME AllInASingleNight_part_two_example
     COMMAND $<TARGET_FILE:AllInASingleNight_Part2> ${CMAKE_CURRENT_LIST_DIR}/res/example.txt 982
 )
+
+add_test(NAME AllInASingleNight_part_two_input
+    COMMAND $<TARGET_FILE:AllInASingleNight_Part2> ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 736
+)
