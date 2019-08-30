@@ -4,21 +4,36 @@ on: [push]
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['windows-2016', 'macOS-latest']
+        include:
+        - os: windows-2016
+          GENERATOR: 'Visual Studio 15 2017'
+        - os: macOS-latest
+          GENERATOR: 'Xcode'
 
-    runs-on: windows-2016
-    
     steps:
     - uses: actions/checkout@v1
     - name: Installing dependency
+      if: matrix.os == 'windows-2016'
       run: |
         choco install cppcheck --version 1.87
         choco install conan --version 1.11.1
+    - name: Installing dependency
+      if: matrix.os == 'macOS-latest'
+      run: |
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+        brew info cppcheck
+        brew install cppcheck@1.87
+        brew install conan@1.11.1
     - name: Creating Build folder
       run: mkdir build
     - name: Build Advent Of Code Solutions in Debug mode
       run: |
         cd build
-        cmake .. -G "Visual Studio 15 2017" && cmake --build . && ctest -C Debug
+        cmake .. -G "${{ matrix.GENERATOR }}" && cmake --build . && ctest -C Debug
     - name: Build Advent Of Code Solutions in Release mode
       run: |
         cd build
