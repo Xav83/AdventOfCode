@@ -22,12 +22,13 @@ std::string lookAndSay(const std::string_view input)
 
 int main (int argc, char** argv)
 {
-    assert(argc == 3);
+    assert(argc == 4);
 
-    auto input = std::string(argv[1]);
-    const auto expectedResult = atoi(argv[2]);
+    const auto numberOfProcessToRun = atoi(argv[1]);
+    auto input = std::string(argv[2]);
+    const auto expectedResult = atoi(argv[3]);
 
-    for(auto i = 0; i < 40 ; ++i)
+    for(auto i = 0; i < numberOfProcessToRun ; ++i)
     {
         input = lookAndSay(input);
     }
