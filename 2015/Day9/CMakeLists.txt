@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.12.4)
 
-
 add_library(AllInASingleNight_SharedCode src/types.cpp src/input_parser.cpp)
 set_target_properties(AllInASingleNight_SharedCode PROPERTIES CXX_STANDARD 17)
 
