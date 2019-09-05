@@ -27,7 +27,7 @@ Now, starting again with the digits in your puzzle input, apply this process <sp
 ## Solution
 
 The source of the solution is contained in the file [main.cpp](src/main.cpp), and the tests checking this solution are in the file [CMakeLists.txt](CMakeLists.txt).
-The executable generated takes 2 arguments :
+The executable generated takes 3 arguments :
 - the number of time the function look-and-say must be processed,
 - the input number,
 - and the expected size of the result processed.
