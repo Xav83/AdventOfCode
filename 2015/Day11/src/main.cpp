@@ -6,7 +6,7 @@ class PasswordChar
 {
 public:
     PasswordChar() = default;
-    PasswordChar(const char value_) : value(value_) {}
+    explicit PasswordChar(const char value_) : value(value_) {}
     ~PasswordChar() = default;
 
     operator char() const { return value; }
@@ -25,12 +25,12 @@ private:
 class Password
 {
 public:
-    Password (const std::string_view input)
+    explicit Password (const std::string_view input)
     {
         assert(input.size() == value.size());
         std::generate(value.begin(), value.end(), [index = 0, &input] () mutable
         {
-            return input[index++];
+            return PasswordChar(input[index++]);
         });
     }
     ~Password () = default;
