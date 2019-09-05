@@ -6,3 +6,7 @@ set_target_properties(CorporatePolicy PROPERTIES CXX_STANDARD 17)
 add_test(NAME CorporatePolicy_part_one_puzzle_input
     COMMAND $<TARGET_FILE:CorporatePolicy> hxbxwxba hxbxxyzz
 )
+
+add_test(NAME CorporatePolicy_part_two_puzzle_input
+    COMMAND $<TARGET_FILE:CorporatePolicy> hxbxxyzz hxcaabcc
+)
