@@ -1,8 +1,0 @@
-[requires]
-OpenSSL/1.1.1a@conan/stable
-
-[generators]
-cmake_multi
-
-[options]
-OpenSSL:shared=False
