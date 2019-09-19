@@ -9,12 +9,11 @@ if(${CPPCHECK} MATCHES CPPCHECK-NOTFOUND)
 endif(${CPPCHECK} MATCHES CPPCHECK-NOTFOUND)
 
 add_custom_target(
-        cppcheck ALL
+        cppcheck
         COMMAND ${CPPCHECK}
         --error-exitcode=1
         --enable=warning,style,performance,portability
         --std=c++11
-        --force
         --project=${PROJECT_NAME}.sln
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMENT "Running cppcheck"
