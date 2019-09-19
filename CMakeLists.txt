@@ -20,6 +20,20 @@ add_custom_target(
         COMMENT "Running cppcheck"
 )
 
+find_program(CONAN NAMES conan.exe HINTS "C:\\Program Files\\Conan\\conan")
+
+if(${CONAN}-NOTFOUND)
+    message(FATAL_ERROR "Conan not found")
+endif(${CONAN}-NOTFOUND)
+
+execute_process(COMMAND ${CONAN} install ${CMAKE_CURRENT_LIST_DIR} -s arch=x86 -s build_type=Debug -s compiler.runtime=MTd --build=missing
+                COMMAND ${CONAN} install ${CMAKE_CURRENT_LIST_DIR} -s arch=x86 -s build_type=Release -s compiler.runtime=MT --build=missing
+                WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
+conan_basic_setup(TARGETS)
+
 include(${PROJECT_SOURCE_DIR}/lib/coordinate/Coordinate.cmake)
 include(${PROJECT_SOURCE_DIR}/lib/stringManipulation/StringManipulation.cmake)
 

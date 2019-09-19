@@ -1,15 +1,6 @@
 cmake_minimum_required(VERSION 3.12.4)
 
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-   file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.14/conan.cmake"
-                 "${CMAKE_BINARY_DIR}/conan.cmake")
-endif()
-
-include(${CMAKE_BINARY_DIR}/conan.cmake)
-conan_cmake_run(REQUIRES jsonformoderncpp/3.7.0@vthiery/stable
-                BASIC_SETUP CMAKE_TARGETS
-                BUILD missing)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
 
 add_executable(JSAbacusFrameworkIo_Part1 src/part_one.cpp)
 set_target_properties(JSAbacusFrameworkIo_Part1 PROPERTIES CXX_STANDARD 17)
