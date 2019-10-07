@@ -11,3 +11,7 @@ add_test(NAME KnightsOftheDinnerTable_part_one_example
 add_test(NAME KnightsOftheDinnerTable_part_one_puzzle_input
     COMMAND $<TARGET_FILE:KnightsOftheDinnerTable> ${CMAKE_CURRENT_LIST_DIR}/res/Part1/puzzle_input.txt 709
 )
+
+add_test(NAME KnightsOftheDinnerTable_part_two_puzzle_input
+    COMMAND $<TARGET_FILE:KnightsOftheDinnerTable> ${CMAKE_CURRENT_LIST_DIR}/res/Part2/puzzle_input.txt 668
+)
