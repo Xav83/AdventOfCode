@@ -7,28 +7,7 @@
 #include <vector>
 #include <regex>
 
-using PersonName = std::string;
-
-class Person
-{
-public:
-    explicit Person (const std::string_view name_) : name(name_) { }
-    Person (const Person& other) : name(other.name) { }
-    ~Person () = default;
-
-    Person& operator= (const Person& other)
-    {
-        name = other.name;
-        return *this;
-    }
-
-    bool operator== (const Person& other) const { return name == other.name; }
-
-    std::string toString() const { return name; }
-
-private:
-    PersonName name;
-};
+using Person = std::string;
 
 using Happiness = int;
 
@@ -40,8 +19,6 @@ public:
     {
     }
     ~Relationship () = default;
-
-    std::string toString() const { return fromPerson.toString() + " " + toPerson.toString() + " " + std::to_string(happiness); }
 
     bool isRelationBetween(const Person& fromPerson_, const Person& toPerson_) const
     {
@@ -70,13 +47,13 @@ Happiness extractHappinessFrom (const std::string& instruction)
     return 0;
 }
 
-std::tuple<PersonName, PersonName, Happiness> extractInformationFrom (const std::string& instruction)
+std::tuple<Person, Person, Happiness> extractInformationFrom (const std::string& instruction)
 {
     const auto firstSpaceCharacter = std::find_if(std::begin(instruction), std::end(instruction), [](const auto& c){ return c == ' '; });
     const auto lastSpaceCharacter = std::find_if(std::rbegin(instruction), std::rend(instruction), [](const auto& c){ return c == ' '; });
 
-    PersonName fromPersonName (std::begin(instruction), firstSpaceCharacter);
-    PersonName toPersonName (lastSpaceCharacter.base()++, std::rbegin(instruction).base());
+    Person fromPersonName (std::begin(instruction), firstSpaceCharacter);
+    Person toPersonName (lastSpaceCharacter.base()++, std::rbegin(instruction).base());
     toPersonName.pop_back(); // Removes the dot
 
     auto happiness = extractHappinessFrom (std::string(instruction));
