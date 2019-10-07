@@ -12,7 +12,7 @@ using PersonName = std::string;
 class Person
 {
 public:
-    Person (const std::string_view name_) : name(name_) { }
+    explicit Person (const std::string_view name_) : name(name_) { }
     Person (const Person& other) : name(other.name) { }
     ~Person () = default;
 
@@ -148,10 +148,8 @@ Happiness gerateTablePosition (std::vector<std::reference_wrapper<Person>>& pers
 Happiness getMostOptimalHappiness(std::vector<Person>& persons, const std::vector<Relationship>& relationships)
 {
     std::vector<std::reference_wrapper<Person>> personsToPlaceRefs, personsPlacedRefs;
-    for(auto& person : persons)
-    {
-        personsToPlaceRefs.emplace_back(person);
-    }
+    std::copy(persons.begin(), persons.end(), std::back_inserter(personsToPlaceRefs));
+
     personsToPlaceRefs.pop_back();
     personsPlacedRefs.emplace_back(persons.back());
     return gerateTablePosition (personsPlacedRefs, personsToPlaceRefs, relationships);
