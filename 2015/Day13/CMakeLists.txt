@@ -8,3 +8,6 @@ add_test(NAME KnightsOftheDinnerTable_part_one_example
     COMMAND $<TARGET_FILE:KnightsOftheDinnerTable> ${CMAKE_CURRENT_LIST_DIR}/res/Part1/example.txt 330
 )
 
+add_test(NAME KnightsOftheDinnerTable_part_one_puzzle_input
+    COMMAND $<TARGET_FILE:KnightsOftheDinnerTable> ${CMAKE_CURRENT_LIST_DIR}/res/Part1/puzzle_input.txt 709
+)
