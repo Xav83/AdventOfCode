@@ -15,17 +15,14 @@ set_target_properties(TheIdealStockingStuffer_Part2 PROPERTIES CXX_STANDARD 17)
 target_link_libraries(TheIdealStockingStuffer_Part2 PUBLIC Md5Wrapper)
 
 add_test(NAME TheIdealStockingStuffer_part_one_example_1
-    COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "abcdef" 609043
-)
+         COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "abcdef" 609043)
 
 add_test(NAME TheIdealStockingStuffer_part_one_example_2
-    COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "pqrstuv" 1048970
-)
+         COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "pqrstuv" 1048970)
 
 add_test(NAME TheIdealStockingStuffer_part_one_puzzle_input
-    COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "yzbqklnj" 282749
-)
+         COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "yzbqklnj" 282749)
 
-add_test(NAME TheIdealStockingStuffer_part_two_puzzle_input
-    COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part2> "yzbqklnj" 9962624
-)
+add_test(
+  NAME TheIdealStockingStuffer_part_two_puzzle_input
+  COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part2> "yzbqklnj" 9962624)
