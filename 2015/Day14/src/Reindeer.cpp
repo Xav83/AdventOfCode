@@ -19,7 +19,11 @@ void Reindeer::oneSecondPassed ()
     --timeBeforeChangingState;
 }
 
+void Reindeer::winBonusPoint () { ++bonusPoints; }
+
 Reindeer::Position Reindeer::getCurrentPosition () const { return position; }
+
+Reindeer::BonusPoint Reindeer::getCurrentBonusPoint () const { return bonusPoints; }
 
 Reindeer extractInformationFrom (const std::string& line)
 {
