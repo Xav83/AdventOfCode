@@ -27,7 +27,6 @@ private:
 
     Position position{0};
     BonusPoint bonusPoints{0};
-    Time currentTimePassed{0};
     Time timeBeforeChangingState{0};
     bool isFlying{true};
 };
