@@ -23,6 +23,6 @@ add_test(NAME TheIdealStockingStuffer_part_one_example_2
 add_test(NAME TheIdealStockingStuffer_part_one_puzzle_input
          COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part1> "yzbqklnj" 282749)
 
-add_test(
-  NAME TheIdealStockingStuffer_part_two_puzzle_input
-  COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part2> "yzbqklnj" 9962624)
+add_test(NAME TheIdealStockingStuffer_part_two_puzzle_input
+         COMMAND $<TARGET_FILE:TheIdealStockingStuffer_Part2> "yzbqklnj"
+                 9962624)

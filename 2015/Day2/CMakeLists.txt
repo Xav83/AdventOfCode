@@ -5,14 +5,14 @@ set_target_properties(dimension PROPERTIES CXX_STANDARD 17)
 target_link_libraries(dimension PUBLIC stringManipulation)
 
 add_executable(IWasToldThereWouldBeNoMath_Part1 src/part_one.cpp)
-set_target_properties(IWasToldThereWouldBeNoMath_Part1
-                      PROPERTIES CXX_STANDARD 17)
+set_target_properties(IWasToldThereWouldBeNoMath_Part1 PROPERTIES CXX_STANDARD
+                                                                  17)
 target_link_libraries(IWasToldThereWouldBeNoMath_Part1
                       PUBLIC dimension stringManipulation)
 
 add_executable(IWasToldThereWouldBeNoMath_Part2 src/part_two.cpp)
-set_target_properties(IWasToldThereWouldBeNoMath_Part2
-                      PROPERTIES CXX_STANDARD 17)
+set_target_properties(IWasToldThereWouldBeNoMath_Part2 PROPERTIES CXX_STANDARD
+                                                                  17)
 target_link_libraries(IWasToldThereWouldBeNoMath_Part2
                       PUBLIC dimension stringManipulation)
 
