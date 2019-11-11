@@ -18,8 +18,11 @@ jobs:
     - name: Build Advent Of Code Solutions in Debug mode
       run: |
         cd build
-        cmake .. -G "Visual Studio 15 2017" && cmake --build . && ctest -C Debug
+        cmake .. -G "Visual Studio 15 2017"
+        cmake --build .
+        ctest -C Debug
     - name: Build Advent Of Code Solutions in Release mode
       run: |
         cd build
-        cmake --build . --config Release && ctest -C Release
+        cmake --build . --config Release
+        ctest -C Release
