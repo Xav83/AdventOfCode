@@ -4,31 +4,29 @@
 
 using Distance = size_t;
 
-class City
-{
+class City {
 public:
-    explicit City (const std::string_view name_);
-    ~City ();
+  explicit City(const std::string_view name_);
+  ~City();
 
-    bool operator==(const City& other) const;
-    bool operator<(const City& other) const;
+  bool operator==(const City &other) const;
+  bool operator<(const City &other) const;
 
 private:
-    std::string name;
+  std::string name;
 };
 
 // ===================
 
-class Route
-{
+class Route {
 public:
-    Route (City& firstTown_, Distance distance_, City& secondTown_);
-    ~Route ();
+  Route(City &firstTown_, Distance distance_, City &secondTown_);
+  ~Route();
 
-    Distance getDistance () const;
-    bool isRouteBetween(const City& firstCity, const City& secondCity) const;
+  Distance getDistance() const;
+  bool isRouteBetween(const City &firstCity, const City &secondCity) const;
 
 private:
-    City& firstTown, &secondTown;
-    Distance distance{0};
+  City &firstTown, &secondTown;
+  Distance distance{0};
 };
