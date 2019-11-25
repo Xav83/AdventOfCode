@@ -10,13 +10,14 @@ using Counpound = std::pair<std::string, CounpoundValue>;
 
 class Aunt {
 public:
-  Aunt();
   Aunt(std::vector<Counpound> knownElements);
   ~Aunt();
 
   const std::array<Counpound, 10> &getCounpounds() const;
 
 private:
+  Aunt();
+
   std::array<Counpound, 10> counpounds;
 };
 
