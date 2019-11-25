@@ -2,37 +2,34 @@
 #include <cassert>
 
 Aunt::Aunt() {
-  counpounds[0].first = "children";
-  counpounds[1].first = "cats";
-  counpounds[2].first = "samoyeds";
-  counpounds[3].first = "pomeranians";
-  counpounds[4].first = "akitas";
-  counpounds[5].first = "vizslas";
-  counpounds[6].first = "goldfish";
-  counpounds[7].first = "trees";
-  counpounds[8].first = "cars";
-  counpounds[9].first = "perfumes";
+  compounds[0].first = "children";
+  compounds[1].first = "cats";
+  compounds[2].first = "samoyeds";
+  compounds[3].first = "pomeranians";
+  compounds[4].first = "akitas";
+  compounds[5].first = "vizslas";
+  compounds[6].first = "goldfish";
+  compounds[7].first = "trees";
+  compounds[8].first = "cars";
+  compounds[9].first = "perfumes";
 }
 
-Aunt::Aunt(std::vector<Counpound> knownElements) : Aunt() {
+Aunt::Aunt(std::vector<Compound> knownElements) : Aunt() {
   for (const auto &knownElement : knownElements) {
-    auto counpound =
-        std::find_if(std::begin(counpounds), std::end(counpounds),
-                     [&knownElement](const auto &counpound) {
-                       return counpound.first == knownElement.first;
-                     });
-    assert(counpound != std::end(counpounds));
-    counpound->second = knownElement.second;
+    auto compound = std::find_if(std::begin(compounds), std::end(compounds),
+                                 [&knownElement](const auto &compound) {
+                                   return compound.first == knownElement.first;
+                                 });
+    assert(compound != std::end(compounds));
+    compound->second = knownElement.second;
   }
 }
 
 Aunt::~Aunt() = default;
 
-const std::array<Counpound, 10> &Aunt::getCounpounds() const {
-  return counpounds;
-}
+const std::array<Compound, 10> &Aunt::getCompounds() const { return compounds; }
 
-std::vector<Counpound> extractCounpounds(const std::string &line) {
+std::vector<Compound> extractCompounds(const std::string &line) {
   std::istringstream stream(line);
   std::string useless, firstElement, secondElement, thirdElement;
   size_t firstElementValue, secondElementValue, thirdElementValue;
