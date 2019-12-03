@@ -18,10 +18,9 @@ size_t countNumberOfCombination(const Containers &containers, size_t volum,
       if (numberMinOfContainerUsed > (numberOfContainerUsed + 1)) {
         numberOfCombination = 1;
         numberMinOfContainerUsed = numberOfContainerUsed + 1;
-      } else if (numberMinOfContainerUsed == (numberOfContainerUsed + 1)) {
-        ++numberOfCombination;
       } else {
-        std::cout << "BOUM " << std::endl;
+        assert(numberMinOfContainerUsed == (numberOfContainerUsed + 1));
+        ++numberOfCombination;
       }
       continue;
     }
@@ -35,9 +34,16 @@ size_t countNumberOfCombination(const Containers &containers, size_t volum,
     std::copy(containers.begin() + index + 1, containers.end(),
               std::back_inserter(containersNotUsed));
 
-    numberOfCombination += countNumberOfCombination(
+    const auto currentNumberMinOfContainerUsed = numberMinOfContainerUsed;
+
+    const auto numberOfCombinationFound = countNumberOfCombination(
         containersNotUsed, remainingVolum, numberOfContainerUsed + 1,
         numberMinOfContainerUsed);
+    if (currentNumberMinOfContainerUsed == numberMinOfContainerUsed) {
+      numberOfCombination += numberOfCombinationFound;
+    } else {
+      numberOfCombination = numberOfCombinationFound;
+    }
   }
   return numberOfCombination;
 }

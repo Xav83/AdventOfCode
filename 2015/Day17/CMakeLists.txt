@@ -19,3 +19,7 @@ add_test(NAME NoSuchThingAsTooMuch_Part1_puzzle_input
 add_test(NAME NoSuchThingAsTooMuch_Part2_example
          COMMAND $<TARGET_FILE:NoSuchThingAsTooMuch_Part2>
                  ${CMAKE_CURRENT_LIST_DIR}/res/example.txt 25 3)
+
+add_test(NAME NoSuchThingAsTooMuch_Part2_puzzle_input
+         COMMAND $<TARGET_FILE:NoSuchThingAsTooMuch_Part2>
+                 ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 150 57)
