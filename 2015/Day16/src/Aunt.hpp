@@ -5,19 +5,20 @@
 #include <sstream>
 #include <vector>
 
-using CounpoundValue = std::optional<size_t>;
-using Counpound = std::pair<std::string, CounpoundValue>;
+using CompoundValue = std::optional<size_t>;
+using Compound = std::pair<std::string, CompoundValue>;
 
 class Aunt {
 public:
-  Aunt();
-  Aunt(std::vector<Counpound> knownElements);
+  Aunt(std::vector<Compound> knownElements);
   ~Aunt();
 
-  const std::array<Counpound, 10> &getCounpounds() const;
+  const std::array<Compound, 10> &getCompounds() const;
 
 private:
-  std::array<Counpound, 10> counpounds;
+  Aunt();
+
+  std::array<Compound, 10> compounds;
 };
 
-std::vector<Counpound> extractCounpounds(const std::string &line);
+std::vector<Compound> extractCompounds(const std::string &line);

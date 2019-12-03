@@ -17,23 +17,23 @@ int main(int argc, char **argv) {
 
   std::vector<Aunt> aunts;
 
-  std::array<Counpound, 10> ticketTape{
-      Counpound{"children", 3}, Counpound{"cats", 7},
-      Counpound{"samoyeds", 2}, Counpound{"pomeranians", 3},
-      Counpound{"akitas", 0},   Counpound{"vizslas", 0},
-      Counpound{"goldfish", 5}, Counpound{"trees", 3},
-      Counpound{"cars", 2},     Counpound{"perfumes", 1}};
+  std::array<Compound, 10> ticketTape{
+      Compound{"children", 3}, Compound{"cats", 7},
+      Compound{"samoyeds", 2}, Compound{"pomeranians", 3},
+      Compound{"akitas", 0},   Compound{"vizslas", 0},
+      Compound{"goldfish", 5}, Compound{"trees", 3},
+      Compound{"cars", 2},     Compound{"perfumes", 1}};
 
   foreachLineIn(fileContent, [&aunts](const std::string &line) {
-    aunts.emplace_back(extractCounpounds(line));
+    aunts.emplace_back(extractCompounds(line));
   });
 
   auto aunt = std::find_if(
       std::begin(aunts), std::end(aunts), [&ticketTape](const auto &aunt) {
-        const auto &auntCounpounds = aunt.getCounpounds();
-        for (auto i = size_t{0}; i < auntCounpounds.size(); ++i) {
-          if (auntCounpounds[i].second.has_value() &&
-              auntCounpounds[i].second.value() != ticketTape[i].second) {
+        const auto &auntCompounds = aunt.getCompounds();
+        for (auto i = size_t{0}; i < auntCompounds.size(); ++i) {
+          if (auntCompounds[i].second.has_value() &&
+              auntCompounds[i].second.value() != ticketTape[i].second) {
             return false;
           }
         }
