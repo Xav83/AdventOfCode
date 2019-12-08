@@ -9,8 +9,8 @@ public:
   Light(LightState initialState);
   ~Light();
 
-  bool isOn() const;
-  bool isOff() const;
+  virtual bool isOn() const;
+  virtual bool isOff() const;
 
   void
   prepareNextState(const std::vector<std::reference_wrapper<Light>> &neighbors);
