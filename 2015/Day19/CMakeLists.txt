@@ -7,3 +7,7 @@ target_link_libraries(MedecineForRudolph PUBLIC stringManipulation)
 add_test(NAME MedecineForRudolph_example
          COMMAND $<TARGET_FILE:MedecineForRudolph>
                  ${CMAKE_CURRENT_LIST_DIR}/res/example.txt 4)
+
+add_test(NAME MedecineForRudolph_puzzle_input
+         COMMAND $<TARGET_FILE:MedecineForRudolph>
+                 ${CMAKE_CURRENT_LIST_DIR}/res/puzzle_input.txt 535)
