@@ -8,6 +8,39 @@
 using Molecule = std::string;
 using Replacement = std::pair<Molecule, Molecule>;
 
+std::vector<Molecule> generateAllMolecules(const std::vector<Replacement>& replacements, const Molecule& baseMolecule)
+{
+   std::vector<Molecule> moleculesCreated;
+
+  for (const auto &replacement : replacements) {
+    for (size_t baseMoleculeIndex = 0; baseMoleculeIndex < baseMolecule.size();
+         ++baseMoleculeIndex) {
+      bool found = true;
+      for (size_t i = 0; i < replacement.first.size(); ++i) {
+        if (baseMoleculeIndex + i > baseMolecule.size()) {
+          break;
+        }
+        if (replacement.first[i] != baseMolecule[baseMoleculeIndex + i]) {
+          found = false;
+          break;
+        }
+      }
+      if (found) {
+        Molecule moleculeCreated = baseMolecule;
+        moleculeCreated.erase(baseMoleculeIndex, replacement.first.size());
+        moleculeCreated.insert(baseMoleculeIndex, replacement.second);
+        moleculesCreated.push_back(moleculeCreated);
+      }
+    }
+  }
+
+  std::sort(std::begin(moleculesCreated), std::end(moleculesCreated));
+  auto last =
+      std::unique(std::begin(moleculesCreated), std::end(moleculesCreated));
+  moleculesCreated.erase(last, std::end(moleculesCreated));
+  return moleculesCreated;
+}
+
 int main(int argc, char **argv) {
   assert(argc == 3);
 
@@ -38,34 +71,7 @@ int main(int argc, char **argv) {
     replacements.emplace_back(fromMolecule, toMolecule);
   });
 
-  std::vector<Molecule> moleculesCreated;
-
-  for (const auto &replacement : replacements) {
-    for (size_t baseMoleculeIndex = 0; baseMoleculeIndex < baseMolecule.size();
-         ++baseMoleculeIndex) {
-      bool found = true;
-      for (size_t i = 0; i < replacement.first.size(); ++i) {
-        if (baseMoleculeIndex + i > baseMolecule.size()) {
-          break;
-        }
-        if (replacement.first[i] != baseMolecule[baseMoleculeIndex + i]) {
-          found = false;
-          break;
-        }
-      }
-      if (found) {
-        Molecule moleculeCreated = baseMolecule;
-        moleculeCreated.erase(baseMoleculeIndex, replacement.first.size());
-        moleculeCreated.insert(baseMoleculeIndex, replacement.second);
-        moleculesCreated.push_back(moleculeCreated);
-      }
-    }
-  }
-
-  std::sort(std::begin(moleculesCreated), std::end(moleculesCreated));
-  auto last =
-      std::unique(std::begin(moleculesCreated), std::end(moleculesCreated));
-  moleculesCreated.erase(last, std::end(moleculesCreated));
+  const auto& moleculesCreated = generateAllMolecules(replacements, baseMolecule);
   const auto numberOfDistinctMolecules = moleculesCreated.size();
 
   if (expectedResult == numberOfDistinctMolecules) {
